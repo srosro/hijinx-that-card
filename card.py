@@ -37,7 +37,7 @@ while n < (int(options.duration)*60*60/int(options.interval)):
             commands.getstatusoutput('open ./play.app') #Play your iTunes library
     balance = float(result['balance']['amount'])
     n += 1
-    if balance > float(options.threshold):
+    if balance >= float(options.threshold):
         if options.growl:
             os.system("growlnotify --title \"Jonathan's Card\" --message 'Balance: $%.02f'" % balance)
         else:
