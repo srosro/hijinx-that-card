@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>329</string>
+	<string>330</string>
 	<key>AMApplicationVersion</key>
-	<string>2.2</string>
+	<string>2.2.1</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -90,8 +90,6 @@
 				<array>
 					<string>iTunes</string>
 				</array>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 			</dict>
 		</dict>
 	</array>

@@ -5,6 +5,9 @@ import commands
 import time
 import os
 
+interval = 30 #interval in seconds
+duration = 3 #duration of check in hours
+threshold = 199.0 #alert threshold
 n = 0
 
 parser = optparse.OptionParser()
