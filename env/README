@@ -1,0 +1,74 @@
+===Notes:
+* Steps 1-10 are only required for setup.
+* When there are new dependencies simply: "pip install -E orchard -r ./requirements.txt"
+* Much of this is cribbed from http://www.saltycrane.com/blog/2009/05/notes-using-pip-and-virtualenv-django/
+* To install a package to the virtual environment: pip install -E orchard packagename
+* To freeze the environment to requirements.txt: pip freeze -E orchard > requirements.txt
+
+=== 1.  Install gfortran
+Assuming you have Xcode 3.2.3 or higher and Snow Leopard, install this: http://r.research.att.com/gfortran-42-5664.pkg.
+If you have Lion with Xcode 4.1 install this: http://r.research.att.com/gfortran-lion-5666-3.pkg
+
+
+=== 2. Go to env/
+# cd /path/to/freshplum/env/
+
+
+=== 3. Make sure python 2.7 is installed:
+# python --version
+Python 2.7.2
+
+Note: python2.7-dev is required to compile some of the binaries below.
+
+
+=== 4. Make sure pip is installed:
+# pip --version
+pip 1.0.2 from /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/pip-1.0.2-py2.7.egg (python 2.7)
+
+Note python version number.  If that doesn't work try this and run again:
+# sudo easy_install-2.7 -U pip
+
+
+=== 5. Make sure /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/ (or similar) is in your path
+If you've installed pip or virtualenv and can't run it then this is probably the problem.
+Solution: vim ~/.profile and add folder to $PATH variable (colon delimited).
+
+
+=== 6. Make sure virtualenv is installed:
+# virtualenv --version
+1.6.1
+
+If that doesn't work install it:
+# sudo pip install virtualenv
+
+
+=== 7. Make sure mysql_config is installed:
+# mysql_config --version
+5.1.57
+
+If you're using macports you may have to symlink it:
+# sudo ln -s /opt/local/bin/mysql_config5 /opt/local/bin/mysql_config
+
+If you didn't install mysql from macports you'll need to install libmysqlclient-dev
+
+
+=== 8. Initalize virtual environment:
+# virtualenv --no-site-packages --distribute orchard
+
+
+=== 9. Install dependencies
+# pip install -E orchard -r ./requirements.txt
+
+
+=== 10. Install scipy
+# pip install -E orchard -r ./scipy_requirement.txt
+
+
+=== 11. Activate & use django
+# source orchard/bin/activate
+# cd ../plum
+# python manage.py runserver
+
+
+=== 12. Deactivate when done
+# deactivate

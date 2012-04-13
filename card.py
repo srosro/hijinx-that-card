@@ -4,6 +4,7 @@ import urllib2
 import commands
 import time
 import os
+import gntp.notifier
 
 interval = 30 #interval in seconds
 duration = 3 #duration of check in hours
@@ -32,17 +33,16 @@ parser.add_option("-t", "--threshold",
 while n < (int(options.duration)*60*60/int(options.interval)):
     try:
         result = json.loads(urllib2.urlopen('http://jonathanstark.com/card/api/latest').read())
-    except:
+    except (urllib2.HTTPError, urllib2.URLError):
         print "Error loading resource."
+        result = None
         if options.growl:
-            os.system("growlnotify --title \"Jonathan's Card\" --message 'Unable to get balance." % balance)
-        else:
-            commands.getstatusoutput('open ./play.app') #Play your iTunes library
-    balance = float(result['balance']['amount'])
+            gntp.notifier.mini("Error loading resource.")
+    balance = float(result['balance']['amount']) if result else 0
     n += 1
     if balance >= float(options.threshold):
         if options.growl:
-            os.system("growlnotify --title \"Jonathan's Card\" --message 'Balance: $%.02f'" % balance)
+            gntp.notifier.mini("It worked!")
         else:
             commands.getstatusoutput('open ./play.app') #Play your iTunes library
         print "BALANCE IS %s" % balance
